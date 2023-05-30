@@ -15,17 +15,16 @@ import org.apache.ibatis.annotations.Param;
  * @date 2019-08-01 09:45:46
  */
 @Mapper
-public interface StudentInfoDao {
+public interface StudentInfoDao  {
 
 	StudentInfoDO get(Integer id);
 	
 	List<StudentInfoDO> list(Map<String,Object> map);
-	
 	int count(Map<String,Object> map);
 	
 	int save(StudentInfoDO studentInfo);
 	
-	int update(StudentInfoDO studentInfo);
+	int update(@Param("record") StudentInfoDO studentInfo);
 	
 	int remove(Integer id);
 	

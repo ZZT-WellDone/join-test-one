@@ -1,10 +1,7 @@
 package com.yizhi.student.controller;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.yizhi.common.annotation.Log;
@@ -44,8 +41,13 @@ public class StudentInfoController {
 	@PostMapping("/save")
 	@RequiresPermissions("student:studentInfo:add")
 	public R save(StudentInfoDO studentInfoDO){
-	
-		return null;
+		try{
+			studentInfoService.save(studentInfoDO);
+			return R.ok("保存成功！");
+		}catch (Exception e){
+			e.printStackTrace();
+			return R.error("保存失败！");
+		}
 	}
 
 	/**
@@ -55,9 +57,9 @@ public class StudentInfoController {
 	@GetMapping("/list")
 	@RequiresPermissions("student:studentInfo:studentInfo")
 	public PageUtils list(@RequestParam Map<String, Object> params){
-
-		return null;
-
+		List<StudentInfoDO> res=studentInfoService.list(params);
+		PageUtils pageUtils=new PageUtils(res,res.size());
+		return  pageUtils;
 	}
 
 
@@ -69,8 +71,13 @@ public class StudentInfoController {
 	@PostMapping("/update")
 	@RequiresPermissions("student:studentInfo:edit")
 	public R update(StudentInfoDO studentInfo){
-
-		return null;
+		try{
+			studentInfoService.update(studentInfo);
+			return R.ok("更新成功！");
+		}catch (Exception e){
+			e.printStackTrace();
+			return R.error("更新失败！");
+		}
 	}
 
 	/**
@@ -81,7 +88,13 @@ public class StudentInfoController {
 	@ResponseBody
 	@RequiresPermissions("student:studentInfo:remove")
 	public R remove( Integer id){
-		return null;
+		try {
+			studentInfoService.remove(id);
+			return R.ok("删除成功！");
+		}catch (Exception e){
+			e.printStackTrace();
+			return R.error("删除失败");
+		}
 	}
 	
 	/**
@@ -92,8 +105,13 @@ public class StudentInfoController {
 	@ResponseBody
 	@RequiresPermissions("student:studentInfo:batchRemove")
 	public R remove(@RequestParam("ids[]") Integer[] ids){
-
-		return null;
+		try {
+			studentInfoService.batchRemove(ids);
+			return R.ok("批量删除成功！");
+		}catch (Exception e){
+			e.printStackTrace();
+			return R.error("批量删除失败！");
+		}
 	}
 
 

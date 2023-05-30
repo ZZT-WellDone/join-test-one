@@ -1,6 +1,7 @@
 package com.yizhi.student.service;
 
 import com.yizhi.student.domain.StudentInfoDO;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -26,5 +27,5 @@ public interface StudentInfoService {
 	
 	int remove(Integer id);
 	
-	int batchRemove(Integer[] ids);
+	int batchRemove(@Param("ids") Integer[] ids);
 }
